@@ -448,81 +448,71 @@
         </footer>
     </div>
 
-    <script>
-        const API_URL = 'http://localhost:3000/api';
-        const videoUrlInput = document.getElementById('videoUrl');
-        const processBtn = document.getElementById('processBtn');
-        const downloadBtn = document.getElementById('downloadBtn');
-        const resetBtn = document.getElementById('resetBtn');
-        const step1 = document.getElementById('step1');
-        const step2 = document.getElementById('step2');
+<script>
+    const API_URL = 'http://localhost:3000/api';
+    const videoUrlInput = document.getElementById('videoUrl');
+    const processBtn = document.getElementById('processBtn');
+    const downloadBtn = document.getElementById('downloadBtn');
+    const resetBtn = document.getElementById('resetBtn');
+    const step1 = document.getElementById('step1');
+    const step2 = document.getElementById('step2');
 
-        async function handleProcess() {
-            const url = videoUrlInput.value.trim();
+    async function handleProcess() {
+        const url = videoUrlInput.value.trim();
+       
+        if (!url) {
+            alert("Cola o link do vídeo aqui, mamãe ♡");
+            return;
+        }
+
+        processBtn.disabled = true;
+        processBtn.innerHTML = '<div class="spinner"></div> Preparando com muito amor...';
+
+        try {
+            const response = await fetch(`${API_URL}/video-info`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ url })
+            });
+           
+            const data = await response.json();
             
-            if (!url) {
-                alert("Cola o link do vídeo aqui, mamãe ♡");
-                return;
-            }
-
-            processBtn.disabled = true;
-            processBtn.innerHTML = '<div class="spinner"></div> Preparando com muito amor...';
-
-            try {
-                const response = await fetch(`${API_URL}/video-info`, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ url })
-                });
+            if (data.success) {
+                step1.classList.add('hidden');
+                step2.classList.remove('hidden');
+                downloadBtn.href = `${API_URL}/download?url=${encodeURIComponent(url)}`;
                 
-                const data = await response.json();
-
-                if (data.success) {
-                    // Mudar para etapa 2
-                    step1.classList.add('hidden');
-                    step2.classList.remove('hidden');
-                    
-                    // Configurar link de download
-                    downloadBtn.href = `${API_URL}/download?url=${encodeURIComponent(url)}`;
-                    
-                    // Scroll suave para o botão de download
-                    setTimeout(() => {
-                        downloadBtn.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                    }, 300);
-                } else {
-                    throw new Error(data.error || 'Ops, algo deu errado...');
-                }
-            } catch (err) {
-                console.error('Erro:', err);
-                alert('Mamãe, verifica se o link está certinho ou se o programinha está ligado no computador, tá? ♡\n\nSe precisar de ajuda, chama o seu filho! ♡');
-            } finally {
-                processBtn.disabled = false;
-                processBtn.innerHTML = '🌸 Preparar o vídeo com carinho 🌸';
+                setTimeout(() => {
+                    downloadBtn.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }, 300);
             }
+        } catch (err) {
+            console.error('Erro:', err);
+            // NENHUMA MENSAGEM PRA MAMÃE. SÓ VOLTA O BOTÃO.
+        } finally {
+            processBtn.disabled = false;
+            processBtn.innerHTML = 'Preparar o vídeo com carinho';
         }
+    }
 
-        processBtn.addEventListener('click', handleProcess);
-        
-        resetBtn.addEventListener('click', () => {
-            videoUrlInput.value = '';
-            step1.classList.remove('hidden');
-            step2.classList.add('hidden');
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        });
-        
-        videoUrlInput.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') {
-                handleProcess();
-            }
-        });
+    processBtn.addEventListener('click', handleProcess);
+   
+    resetBtn.addEventListener('click', () => {
+        videoUrlInput.value = '';
+        step1.classList.remove('hidden');
+        step2.classList.add('hidden');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+   
+    videoUrlInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') handleProcess();
+    });
 
-        // Prevenir zoom em dispositivos iOS ao focar no input
-        if (/iPhone|iPad|iPod/.test(navigator.userAgent)) {
-            document.querySelector('meta[name=viewport]').setAttribute(
-                'content', 
-                'width=device-width, initial-scale=1, maximum-scale=1'
-            );
-        }
-    </script>
+    if (/iPhone|iPad|iPod/.test(navigator.userAgent)) {
+        document.querySelector('meta[name=viewport]').setAttribute(
+            'content', 'width=device-width, initial-scale=1, maximum-scale=1'
+        );
+    }
+</script>
 </body>
 </html>
