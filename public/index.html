@@ -115,7 +115,6 @@
             align-items: center;
             justify-content: center;
             gap: 12px;
-            text-decoration: none;
             color: white;
         }
 
@@ -136,30 +135,38 @@
 
         .btn-download {
             background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
-            font-size: 1.8em;
-            padding: 28px;
-            animation: bounce 2s infinite;
-            margin-bottom: 15px;
+            font-size: 2.2em;
+            padding: 35px;
+            animation: bounceAndGlow 2s infinite;
+            text-decoration: none;
+            box-shadow: 0 10px 40px rgba(59, 130, 246, 0.5);
         }
 
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
+        @keyframes bounceAndGlow {
+            0%, 100% { 
+                transform: translateY(0) scale(1);
+                box-shadow: 0 10px 40px rgba(59, 130, 246, 0.5);
+            }
+            50% { 
+                transform: translateY(-15px) scale(1.02);
+                box-shadow: 0 20px 60px rgba(59, 130, 246, 0.7);
+            }
         }
 
         .btn-download:hover {
-            transform: translateY(-8px) !important;
-            box-shadow: 0 20px 50px rgba(59, 130, 246, 0.5);
+            transform: translateY(-10px) scale(1.05) !important;
+            box-shadow: 0 25px 70px rgba(59, 130, 246, 0.8) !important;
         }
 
         .btn-reset {
-            background: #6b7280;
+            background: #9ca3af;
             padding: 15px;
-            font-size: 1.1em;
+            font-size: 1em;
+            margin-top: 15px;
         }
 
         .btn-reset:hover {
-            background: #4b5563;
+            background: #6b7280;
         }
 
         .message {
@@ -177,9 +184,9 @@
         }
 
         .message.error {
-            background: #fef3c7;
-            border: 2px solid #fcd34d;
-            color: #92400e;
+            background: #fee;
+            border: 2px solid #fcc;
+            color: #c33;
         }
 
         .message.success {
@@ -188,28 +195,65 @@
             color: #065f46;
         }
 
-        .info-box {
-            background: #d1fae5;
-            border: 2px solid #6ee7b7;
-            border-radius: 15px;
-            padding: 18px;
-            margin-bottom: 20px;
-        }
-
-        .info-box p {
-            color: #065f46;
-            font-weight: 600;
-            margin-bottom: 8px;
-        }
-
-        .platform-badge {
-            display: inline-block;
-            background: #9333ea;
+        .big-success-message {
+            background: linear-gradient(135deg, #10b981, #059669);
             color: white;
-            padding: 6px 16px;
+            padding: 30px;
             border-radius: 20px;
-            font-size: 0.9em;
-            text-transform: capitalize;
+            text-align: center;
+            margin-bottom: 25px;
+            animation: slideDown 0.5s ease-out;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .success-icon {
+            font-size: 4em;
+            margin-bottom: 10px;
+            animation: scaleIn 0.6s ease-out;
+        }
+
+        @keyframes scaleIn {
+            from {
+                transform: scale(0);
+            }
+            to {
+                transform: scale(1);
+            }
+        }
+
+        .big-success-message h2 {
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+
+        .big-success-message p {
+            font-size: 1.2em;
+            opacity: 0.95;
+        }
+
+        .download-info {
+            background: #fef3c7;
+            border: 2px solid #fcd34d;
+            border-radius: 15px;
+            padding: 15px;
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .download-info p {
+            color: #92400e;
+            font-weight: 500;
+            margin: 0;
         }
 
         .instructions {
@@ -242,12 +286,13 @@
         .tip-box {
             margin-top: 20px;
             padding: 15px;
-            background: #dbeafe;
+            background: #dcfce7;
             border-radius: 12px;
+            border: 2px solid #86efac;
         }
 
         .tip-box p {
-            color: #1e40af;
+            color: #166534;
             font-size: 0.95em;
             line-height: 1.6;
         }
@@ -277,6 +322,33 @@
             font-size: 0.95em;
         }
 
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: #e5e7eb;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-top: 15px;
+            display: none;
+        }
+
+        .progress-bar.show {
+            display: block;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+            width: 0%;
+            transition: width 0.3s;
+            animation: pulse-bar 1.5s infinite;
+        }
+
+        @keyframes pulse-bar {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+
         @media (max-width: 640px) {
             h1 {
                 font-size: 2em;
@@ -301,7 +373,7 @@
                 </div>
             </div>
             <h1>Baixador de Vídeos</h1>
-            <p class="subtitle">YouTube • Instagram • Facebook • TikTok</p>
+            <p class="subtitle">YouTube • Instagram • Facebook • TikTok • +1000 sites</p>
         </div>
 
         <div class="card">
@@ -310,67 +382,86 @@
                 <input 
                     type="text" 
                     id="videoUrl" 
-                    placeholder="https://youtube.com/... ou instagram.com/..."
+                    placeholder="https://youtube.com/... ou instagram.com/... ou facebook.com/..."
                 />
             </div>
 
             <div id="message" class="message"></div>
 
-            <div id="infoBox" class="info-box hidden">
-                <p>✅ Vídeo pronto para download!</p>
-                <span id="platformBadge" class="platform-badge"></span>
+            <div id="videoInfo" class="video-info"></div>
+
+            <!-- ETAPA 1: Processar -->
+            <div id="step1">
+                <button id="processBtn" class="btn btn-process">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                    </svg>
+                    Processar Vídeo
+                </button>
             </div>
 
-            <button id="processBtn" class="btn btn-process">
-                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <polygon points="5 3 19 12 5 21 5 3"></polygon>
-                </svg>
-                Processar Vídeo
-            </button>
+            <!-- ETAPA 2: Baixar -->
+            <div id="step2" class="hidden">
+                <div class="big-success-message">
+                    <div class="success-icon">✅</div>
+                    <h2>Vídeo Pronto!</h2>
+                    <p>Agora clique no botão azul grande abaixo:</p>
+                </div>
 
-            <a id="downloadBtn" class="btn btn-download hidden" target="_blank">
-                <svg width="35" height="35" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-                    <polyline points="7 10 12 15 17 10"></polyline>
-                    <line x1="12" y1="15" x2="12" y2="3"></line>
-                </svg>
-                BAIXAR
-            </a>
+                <a id="downloadBtn" class="btn btn-download" download>
+                    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                        <polyline points="7 10 12 15 17 10"></polyline>
+                        <line x1="12" y1="15" x2="12" y2="3"></line>
+                    </svg>
+                    BAIXAR AGORA
+                </a>
 
-            <button id="resetBtn" class="btn btn-reset hidden">
-                Baixar outro vídeo
-            </button>
+                <div class="download-info">
+                    <p>⏳ O download pode levar alguns segundos dependendo do tamanho do vídeo</p>
+                </div>
+
+                <button id="resetBtn" class="btn btn-reset">
+                    🔄 Baixar outro vídeo
+                </button>
+            </div>
+
+            <div class="progress-bar" id="progressBar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
 
             <div class="instructions">
                 <h3>📱 Como usar:</h3>
                 <ol>
-                    <li><strong>1.</strong> Copie o link do vídeo (YouTube, Instagram, Facebook, TikTok)</li>
-                    <li><strong>2.</strong> Cole o link no campo acima</li>
-                    <li><strong>3.</strong> Clique no botão verde "Processar Vídeo"</li>
-                    <li><strong>4.</strong> Clique no botão azul <strong>"BAIXAR"</strong> que vai aparecer</li>
+                    <li><strong>1.</strong> Copie o link do vídeo</li>
+                    <li><strong>2.</strong> Cole no campo acima</li>
+                    <li><strong>3.</strong> Clique no botão <strong>VERDE</strong></li>
+                    <li><strong>4.</strong> Quando aparecer, clique no botão <strong>AZUL GRANDE</strong></li>
                 </ol>
                 <div class="tip-box">
-                    <p>💡 <strong>Dica:</strong> Você será redirecionado para um site confiável onde poderá escolher a qualidade e baixar o vídeo em MP4!</p>
+                    <p>✅ <strong>Simples assim!</strong> Funciona com YouTube, Instagram, Facebook, TikTok e mais de 1000 sites!</p>
                 </div>
             </div>
         </div>
 
         <footer>
-            Feito com ❤️ para facilitar sua vida
+            Feito com ❤️ • Powered by yt-dlp
         </footer>
     </div>
 
     <script>
+        const API_URL = 'http://localhost:3000/api';
         const videoUrlInput = document.getElementById('videoUrl');
         const processBtn = document.getElementById('processBtn');
         const downloadBtn = document.getElementById('downloadBtn');
         const resetBtn = document.getElementById('resetBtn');
         const message = document.getElementById('message');
-        const infoBox = document.getElementById('infoBox');
-        const platformBadge = document.getElementById('platformBadge');
+        const progressBar = document.getElementById('progressBar');
+        const step1 = document.getElementById('step1');
+        const step2 = document.getElementById('step2');
 
         function showMessage(text, type) {
-            message.textContent = text;
+            message.innerHTML = text;
             message.className = `message ${type} show`;
         }
 
@@ -378,71 +469,51 @@
             message.className = 'message';
         }
 
-        function identifyPlatform(url) {
-            if (/instagram\.com/.test(url)) return 'instagram';
-            if (/youtu\.be|youtube\.com/.test(url)) return 'youtube';
-            if (/facebook\.com|fb\.watch/.test(url)) return 'facebook';
-            if (/tiktok\.com/.test(url)) return 'tiktok';
-            if (/twitter\.com|x\.com/.test(url)) return 'twitter';
-            return null;
-        }
-
         async function handleProcess() {
             const url = videoUrlInput.value.trim();
             
             hideMessage();
-            infoBox.classList.add('hidden');
-            downloadBtn.classList.add('hidden');
-            resetBtn.classList.add('hidden');
 
             if (!url) {
-                showMessage('Por favor, cole o link do vídeo', 'error');
-                return;
-            }
-
-            const platform = identifyPlatform(url);
-
-            if (!platform) {
-                showMessage('Link não reconhecido. Use links do YouTube, Instagram, Facebook, TikTok ou Twitter', 'error');
+                showMessage('❌ Por favor, cole o link do vídeo', 'error');
                 return;
             }
 
             processBtn.disabled = true;
-            processBtn.innerHTML = '<div class="spinner"></div> Processando...';
+            processBtn.innerHTML = '<div class="spinner"></div> Aguarde...';
+            progressBar.classList.add('show');
 
-            // Aguardar 1 segundo (simulando processamento)
-            await new Promise(resolve => setTimeout(resolve, 1000));
-
-            // Determinar melhor site de download baseado na plataforma
-            let downloadUrl;
-            
-            if (platform === 'youtube') {
-                downloadUrl = `https://www.y2mate.com/youtube/${encodeURIComponent(url)}`;
-            } else if (platform === 'instagram' || platform === 'facebook') {
-                downloadUrl = `https://snapsave.app/pt?url=${encodeURIComponent(url)}`;
-            } else if (platform === 'tiktok') {
-                downloadUrl = `https://ssstik.io/pt`;
-                // Copiar URL para clipboard
-                navigator.clipboard.writeText(url).then(() => {
-                    showMessage('✅ Link copiado! Cole no site que vai abrir.', 'success');
+            try {
+                const response = await fetch(`${API_URL}/video-info`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ url })
                 });
-            } else {
-                downloadUrl = `https://snapsave.app/pt?url=${encodeURIComponent(url)}`;
+
+                const data = await response.json();
+
+                if (data.success) {
+                    // Esconder etapa 1 e mostrar etapa 2
+                    step1.classList.add('hidden');
+                    step2.classList.remove('hidden');
+                    
+                    downloadBtn.href = `${API_URL}/download?url=${encodeURIComponent(url)}`;
+                } else {
+                    throw new Error(data.error || 'Erro desconhecido');
+                }
+            } catch (error) {
+                console.error('Erro:', error);
+                showMessage(`❌ Erro: ${error.message}. Certifique-se de que o servidor está rodando.`, 'error');
+            } finally {
+                processBtn.disabled = false;
+                processBtn.innerHTML = `
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                    </svg>
+                    Processar Vídeo
+                `;
+                progressBar.classList.remove('show');
             }
-
-            platformBadge.textContent = platform;
-            infoBox.classList.remove('hidden');
-            downloadBtn.href = downloadUrl;
-            downloadBtn.classList.remove('hidden');
-            resetBtn.classList.remove('hidden');
-
-            processBtn.disabled = false;
-            processBtn.innerHTML = `
-                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <polygon points="5 3 19 12 5 21 5 3"></polygon>
-                </svg>
-                Processar Vídeo
-            `;
         }
 
         processBtn.addEventListener('click', handleProcess);
@@ -450,9 +521,9 @@
         resetBtn.addEventListener('click', () => {
             videoUrlInput.value = '';
             hideMessage();
-            infoBox.classList.add('hidden');
-            downloadBtn.classList.add('hidden');
-            resetBtn.classList.add('hidden');
+            step1.classList.remove('hidden');
+            step2.classList.add('hidden');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         });
 
         videoUrlInput.addEventListener('keypress', (e) => {
