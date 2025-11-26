@@ -3,28 +3,21 @@ const cors = require('cors');
 const { spawn } = require('child_process');
 const { promisify } = require('util');
 const { exec } = require('child_process');
-const path = require('path');
-const fs = require('fs');
 const execPromise = promisify(exec);
 
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
 app.use(cors());
 app.use(express.json());
 app.use(express.static('public'));
 
-// Função pra limpar a URL
 function cleanUrl(url) {
-  // Adiciona https:// se não tiver
   if (!url.startsWith('http')) {
     url = 'https://' + url;
   }
-  
-  // Remove parâmetros de playlist
   url = url.split('&list=')[0];
   url = url.split('?list=')[0];
-  
   return url;
 }
 
@@ -104,5 +97,5 @@ app.get('/api/download', (req, res) => {
 });
 
 app.listen(PORT, () => {
-  console.log(`🚀 Servidor rodando em http://localhost:${PORT}`);
+  console.log(`🚀 Servidor rodando na porta ${PORT}`);
 });
