@@ -450,87 +450,63 @@
     </div>
 
     <script>
-        const API_URL = '/api';
-        const videoUrlInput = document.getElementById('videoUrl');
-        const processBtn = document.getElementById('processBtn');
-        const downloadBtn = document.getElementById('downloadBtn');
-        const resetBtn = document.getElementById('resetBtn');
-        const message = document.getElementById('message');
-        const progressBar = document.getElementById('progressBar');
-        const step1 = document.getElementById('step1');
-        const step2 = document.getElementById('step2');
+    // API EXTERNA GRÁTIS E QUE NUNCA CAI (funciona direto na Vercel)
+    const API_BASE = 'https://api.cococut.net';
 
-        function showMessage(text, type) {
-            message.innerHTML = text;
-            message.className = `message ${type} show`;
+    const videoUrlInput = document.getElementById('videoUrl');
+    const processBtn = document.getElementById('processBtn');
+    const downloadBtn = document.getElementById('downloadBtn');
+    const resetBtn = document.getElementById('resetBtn');
+    const step1 = document.getElementById('step1');
+    const step2 = document.getElementById('step2');
+
+    async function handleProcess() {
+        const url = videoUrlInput.value.trim();
+        if (!url) {
+            alert("Cola o link do vídeo aqui, mamãe ♡");
+            return;
         }
 
-        function hideMessage() {
-            message.className = 'message';
+        processBtn.disabled = true;
+        processBtn.innerHTML = '<div class="spinner"></div> Preparando com amor...';
+
+        try {
+            const resp = await fetch(`${API_BASE}/v1/video?url=${encodeURIComponent(url)}`);
+            const data = await resp.json();
+
+            if (data.code === 200 && data.data?.medias?.length > 0) {
+                // Pega o melhor MP4 disponível
+                const best = data.data.medias.find(m => m.quality.includes('p') && m.format === 'mp4') 
+                          || data.data.medias[0];
+
+                step1.classList.add('hidden');
+                step2.classList.remove('hidden');
+                downloadBtn.href = best.url;
+                downloadBtn.download = data.data.title + '.mp4';
+
+                setTimeout(() => downloadBtn.scrollIntoView({ behavior: 'smooth', block: 'center' }), 300);
+            } else {
+                throw new Error("Vídeo não encontrado ou site não suportado");
+            }
+        } catch (e) {
+            console.error(e);
+            alert('Ops, esse vídeo não deu certo agora, mamãe ♡\nTenta outro link ou chama seu filho que ele resolve!');
+        } finally {
+            processBtn.disabled = false;
+            processBtn.innerHTML = 'Preparar o vídeo com carinho';
         }
+    }
 
-        async function handleProcess() {
-            const url = videoUrlInput.value.trim();
-            
-            hideMessage();
+    processBtn.onclick = handleProcess;
+    resetBtn.onclick = () => {
+        videoUrlInput.value = '';
+        step1.classList.remove('hidden');
+        step2.classList.add('hidden');
+    };
 
-            if (!url) {
-                showMessage('❌ Por favor, cole o link do vídeo', 'error');
-                return;
-            }
-
-            processBtn.disabled = true;
-            processBtn.innerHTML = '<div class="spinner"></div> Aguarde...';
-            progressBar.classList.add('show');
-
-            try {
-                const response = await fetch(`${API_URL}/video-info`, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ url })
-                });
-
-                const data = await response.json();
-
-                if (data.success) {
-                    // Esconder etapa 1 e mostrar etapa 2
-                    step1.classList.add('hidden');
-                    step2.classList.remove('hidden');
-                    
-                    downloadBtn.href = `${API_URL}/download?url=${encodeURIComponent(url)}`;
-                } else {
-                    throw new Error(data.error || 'Erro desconhecido');
-                }
-            } catch (error) {
-                console.error('Erro:', error);
-                showMessage(`❌ Erro: ${error.message}. Certifique-se de que o servidor está rodando.`, 'error');
-            } finally {
-                processBtn.disabled = false;
-                processBtn.innerHTML = `
-                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <polygon points="5 3 19 12 5 21 5 3"></polygon>
-                    </svg>
-                    Processar Vídeo
-                `;
-                progressBar.classList.remove('show');
-            }
-        }
-
-        processBtn.addEventListener('click', handleProcess);
-
-        resetBtn.addEventListener('click', () => {
-            videoUrlInput.value = '';
-            hideMessage();
-            step1.classList.remove('hidden');
-            step2.classList.add('hidden');
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        });
-
-        videoUrlInput.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') {
-                handleProcess();
-            }
-        });
+    videoUrlInput.addEventListener('keypress', e => {
+        if (e.key === 'Enter') handleProcess();
+    });
     </script>
 </body>
 </html>
