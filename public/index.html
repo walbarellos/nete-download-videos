@@ -2,311 +2,376 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Baixador de Vídeos</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Baixador da Mamãe Nete ♡</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
+        * { 
+            margin: 0; 
+            padding: 0; 
             box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
         }
-
+        
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Georgia', 'Comic Sans MS', serif;
             min-height: 100vh;
-            background: linear-gradient(135deg, #9333ea 0%, #ec4899 50%, #ef4444 100%);
+            background: linear-gradient(135deg, #fdf2f8 0%, #fce7f3 40%, #e9d5ff 100%);
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 20px;
+            padding: 10px;
+            line-height: 1.7;
+            overflow-x: hidden;
         }
-
-        .container {
-            max-width: 700px;
+        
+        .container { 
+            max-width: 720px; 
             width: 100%;
         }
 
         .header {
             text-align: center;
-            margin-bottom: 40px;
-        }
-
-        .icon-wrapper {
-            display: flex;
-            justify-content: center;
             margin-bottom: 20px;
         }
+        
+        .big-heart {
+            font-size: 70px;
+            animation: heartbeat 2s infinite;
+            text-shadow: 0 0 20px rgba(236, 72, 153, 0.5);
+        }
+        
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+        
+        h1 {
+            color: #db2777;
+            font-size: 2.2em;
+            margin: 10px 0;
+            font-weight: normal;
+            letter-spacing: 1px;
+        }
+        
+        .subtitle {
+            font-size: 1.1em;
+            color: #be185d;
+            font-style: italic;
+        }
 
-        .icon {
+        .love-message {
             background: white;
             padding: 20px;
-            border-radius: 50%;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-            animation: pulse 2s infinite;
+            border-radius: 20px;
+            box-shadow: 0 15px 40px rgba(236, 72, 153, 0.15);
+            margin-bottom: 20px;
+            font-size: 1.15em;
+            color: #831843;
+            text-align: center;
+            border: 3px solid #fbcfe8;
+            line-height: 1.8;
         }
-
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-        }
-
-        .icon svg {
-            width: 48px;
-            height: 48px;
-            fill: #9333ea;
-        }
-
-        h1 {
-            color: white;
-            font-size: 3em;
-            margin-bottom: 10px;
-            text-shadow: 0 4px 10px rgba(0,0,0,0.3);
-        }
-
-        .subtitle {
-            color: rgba(255,255,255,0.9);
+        
+        .love-message b { 
+            color: #ec4899; 
             font-size: 1.2em;
         }
 
         .card {
             background: white;
-            border-radius: 30px;
-            padding: 40px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            border-radius: 25px;
+            padding: 25px 20px;
+            box-shadow: 0 20px 50px rgba(236, 72, 153, 0.2);
+            text-align: center;
         }
-
-        .input-group {
-            margin-bottom: 25px;
-        }
-
+        
         label {
-            display: block;
-            color: #333;
-            font-weight: 600;
+            font-size: 1.3em;
+            color: #be185d;
             margin-bottom: 12px;
-            font-size: 1.1em;
+            display: block;
+            font-weight: 600;
         }
-
+        
         input {
             width: 100%;
             padding: 18px;
             font-size: 1.1em;
-            border: 2px solid #ddd;
-            border-radius: 15px;
-            transition: all 0.3s;
+            border: 3px solid #f9a8d4;
+            border-radius: 20px;
+            margin-bottom: 25px;
+            background: #fffbfa;
+            -webkit-appearance: none;
         }
-
+        
         input:focus {
             outline: none;
-            border-color: #9333ea;
-            box-shadow: 0 0 0 4px rgba(147, 51, 234, 0.1);
+            border-color: #ec4899;
+            box-shadow: 0 0 0 4px rgba(236, 72, 153, 0.2);
         }
 
         .btn {
             width: 100%;
             padding: 20px;
+            margin: 15px 0;
             border: none;
-            border-radius: 15px;
-            font-size: 1.3em;
+            border-radius: 20px;
+            font-size: 1.4em;
             font-weight: bold;
             cursor: pointer;
-            transition: all 0.3s;
+            color: white;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 12px;
+            gap: 10px;
+            transition: all 0.3s;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
             text-decoration: none;
-            color: white;
+            -webkit-user-select: none;
+            user-select: none;
         }
-
+        
+        .btn:active {
+            transform: scale(0.98);
+        }
+        
         .btn-process {
-            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
-            margin-bottom: 20px;
+            background: linear-gradient(135deg, #fda4af, #f43f5e);
         }
-
-        .btn-process:hover:not(:disabled) {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 30px rgba(16, 185, 129, 0.4);
+        
+        .btn-process:hover:not(:disabled) { 
+            transform: translateY(-3px) scale(1.01); 
         }
-
+        
         .btn-process:disabled {
-            opacity: 0.6;
+            opacity: 0.7;
             cursor: not-allowed;
         }
 
-        .download-buttons {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
+        .success-banner {
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: white;
+            padding: 25px 20px;
+            border-radius: 20px;
+            text-align: center;
             margin-bottom: 20px;
+            animation: slideDown 0.5s ease-out;
+        }
+        
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .success-emoji {
+            font-size: 4em;
+            display: block;
+            margin-bottom: 10px;
+            animation: scaleIn 0.6s ease-out;
+        }
+        
+        @keyframes scaleIn {
+            from { transform: scale(0); }
+            to { transform: scale(1); }
+        }
+        
+        .success-banner h2 {
+            font-size: 1.8em;
+            margin-bottom: 10px;
+            font-weight: normal;
+        }
+        
+        .success-banner p {
+            font-size: 1.15em;
+            opacity: 0.95;
         }
 
         .btn-download {
-            background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
-            font-size: 1.5em;
-            padding: 22px;
+            background: linear-gradient(135deg, #d8b4fe, #f472b6);
+            font-size: 1.8em !important;
+            padding: 30px 20px !important;
+            animation: gentleBounce 2.5s infinite;
+            box-shadow: 0 15px 40px rgba(244, 63, 94, 0.4);
+            line-height: 1.3;
         }
-
-        .btn-download:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 40px rgba(59, 130, 246, 0.4);
-        }
-
-        .btn-download.primary {
-            animation: bounce 2s infinite;
-        }
-
-        @keyframes bounce {
+        
+        @keyframes gentleBounce {
             0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
+            50% { transform: translateY(-12px); }
+        }
+        
+        .btn-download:active {
+            animation: none;
         }
 
-        .btn-alternative {
-            background: linear-gradient(135deg, #14b8a6 0%, #0891b2 100%);
-            font-size: 1.2em;
-            padding: 18px;
-        }
-
-        .btn-reset {
-            background: #6b7280;
-            padding: 15px;
-            font-size: 1.1em;
-        }
-
-        .btn-reset:hover {
-            background: #4b5563;
-        }
-
-        .message {
-            padding: 18px;
-            border-radius: 15px;
-            margin-bottom: 20px;
-            display: none;
-            align-items: center;
-            gap: 12px;
-            font-weight: 500;
-        }
-
-        .message.show {
-            display: flex;
-        }
-
-        .message.error {
+        .download-tip {
             background: #fef3c7;
-            border: 2px solid #fcd34d;
-            color: #92400e;
-        }
-
-        .message.success {
-            background: #d1fae5;
-            border: 2px solid #6ee7b7;
-            color: #065f46;
-        }
-
-        .message.info {
-            background: #dbeafe;
-            border: 2px solid #93c5fd;
-            color: #1e40af;
-        }
-
-        .info-box {
-            background: #d1fae5;
-            border: 2px solid #6ee7b7;
+            border: 3px solid #fcd34d;
             border-radius: 15px;
-            padding: 18px;
-            margin-bottom: 20px;
-        }
-
-        .info-box p {
-            color: #065f46;
-            font-weight: 600;
-            margin-bottom: 8px;
-        }
-
-        .platform-badge {
-            display: inline-block;
-            background: #9333ea;
-            color: white;
-            padding: 6px 16px;
-            border-radius: 20px;
-            font-size: 0.9em;
-            text-transform: capitalize;
-        }
-
-        .instructions {
-            margin-top: 35px;
-            padding-top: 35px;
-            border-top: 2px solid #e5e7eb;
-        }
-
-        .instructions h3 {
-            color: #333;
-            margin-bottom: 18px;
-            text-align: center;
-            font-size: 1.2em;
-        }
-
-        .instructions ol {
-            color: #666;
-            line-height: 1.9;
-            padding-left: 25px;
-        }
-
-        .instructions li {
-            margin-bottom: 12px;
-        }
-
-        .instructions strong {
-            color: #9333ea;
-        }
-
-        .tip-box {
-            margin-top: 20px;
             padding: 15px;
-            background: #dbeafe;
-            border-radius: 12px;
-        }
-
-        .tip-box p {
-            color: #1e40af;
+            margin: 15px 0;
             font-size: 0.95em;
+            color: #92400e;
             line-height: 1.6;
         }
 
-        .hidden {
-            display: none !important;
+        .btn-reset {
+            background: linear-gradient(135deg, #c084fc, #a855f7);
+            font-size: 1.2em !important;
+            padding: 18px !important;
         }
 
-        .spinner {
-            display: inline-block;
-            width: 24px;
-            height: 24px;
-            border: 3px solid rgba(255,255,255,0.3);
-            border-radius: 50%;
-            border-top-color: white;
-            animation: spin 1s linear infinite;
+        .instructions {
+            margin-top: 30px;
+            background: #fefce8;
+            padding: 20px;
+            border-radius: 20px;
+            border: 3px dashed #fbbf24;
+            font-size: 1.05em;
+            color: #92400e;
         }
-
-        @keyframes spin {
-            to { transform: rotate(360deg); }
+        
+        .instructions h3 {
+            margin-bottom: 15px;
+            font-size: 1.3em;
+            color: #92400e;
+        }
+        
+        .instructions ol { 
+            text-align: left; 
+            margin-left: 20px;
+            line-height: 2;
+        }
+        
+        .instructions strong { 
+            color: #dc2626; 
         }
 
         footer {
-            text-align: center;
-            color: rgba(255,255,255,0.8);
             margin-top: 30px;
-            font-size: 0.95em;
+            text-align: center;
+            font-size: 1.1em;
+            color: #be185d;
+            font-weight: 600;
+            line-height: 1.8;
+            padding: 0 10px;
+        }
+        
+        .hidden { 
+            display: none !important; 
+        }
+        
+        .spinner { 
+            width: 28px; 
+            height: 28px; 
+            border: 4px solid #fff; 
+            border-top-color: transparent; 
+            border-radius: 50%; 
+            animation: spin 1s linear infinite; 
+            display: inline-block;
+        }
+        
+        @keyframes spin { 
+            to { transform: rotate(360deg); } 
         }
 
+        /* Responsividade aprimorada */
         @media (max-width: 640px) {
+            body {
+                padding: 8px;
+            }
+            
+            .big-heart {
+                font-size: 60px;
+            }
+            
             h1 {
-                font-size: 2em;
+                font-size: 1.8em;
             }
+            
+            .subtitle {
+                font-size: 1em;
+            }
+            
+            .love-message {
+                font-size: 1.05em;
+                padding: 18px;
+                line-height: 1.7;
+            }
+            
             .card {
-                padding: 25px;
+                padding: 20px 15px;
             }
-            .btn-download {
+            
+            label {
+                font-size: 1.2em;
+            }
+            
+            input {
+                font-size: 1em;
+                padding: 16px;
+            }
+            
+            .btn {
                 font-size: 1.3em;
+                padding: 18px;
+            }
+            
+            .btn-download {
+                font-size: 1.6em !important;
+                padding: 25px 15px !important;
+            }
+            
+            .success-banner h2 {
+                font-size: 1.6em;
+            }
+            
+            .success-banner p {
+                font-size: 1.05em;
+            }
+            
+            .instructions {
+                font-size: 1em;
+                padding: 18px;
+            }
+            
+            .instructions h3 {
+                font-size: 1.2em;
+            }
+            
+            footer {
+                font-size: 1em;
+            }
+        }
+        
+        @media (max-width: 400px) {
+            h1 {
+                font-size: 1.5em;
+            }
+            
+            .love-message {
+                font-size: 0.95em;
+            }
+            
+            .btn-download {
+                font-size: 1.4em !important;
+            }
+        }
+
+        /* Melhorias de toque para mobile */
+        @media (hover: none) and (pointer: coarse) {
+            .btn {
+                padding: 22px;
+            }
+            
+            input {
+                font-size: 16px; /* Evita zoom automático no iOS */
             }
         }
     </style>
@@ -314,288 +379,149 @@
 <body>
     <div class="container">
         <div class="header">
-            <div class="icon-wrapper">
-                <div class="icon">
-                    <svg viewBox="0 0 24 24">
-                        <path d="M17 10.5V7c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1v10c0 .55.45 1 1 1h12c.55 0 1-.45 1-1v-3.5l4 4v-11l-4 4z"/>
-                    </svg>
-                </div>
-            </div>
-            <h1>Baixador de Vídeos</h1>
-            <p class="subtitle">YouTube • Instagram • Facebook • TikTok</p>
+            <div class="big-heart">♡</div>
+            <h1>Baixador da Mamãe Nete</h1>
+            <p class="subtitle">Feito com todo o amor do seu filho ♡</p>
+        </div>
+
+        <div class="love-message">
+            Oi minha rainha <b>Nete</b>! ♡<br><br>
+            Seu filho fez esse site só pra você, mamãe.<br>
+            Agora você pode salvar todos os vídeos que quiser:<br>
+            receitas, músicas, novenas, vídeos da família… tudo!<br><br>
+            É só colar o link que eu faço a mágica acontecer. Te amo demais! ♡
         </div>
 
         <div class="card">
-            <div class="input-group">
-                <label for="videoUrl">Cole o link do vídeo aqui:</label>
-                <input 
-                    type="text" 
-                    id="videoUrl" 
-                    placeholder="https://youtube.com/... ou instagram.com/..."
-                />
+            <label>Colinha o link aqui, mamãe ♡</label>
+            <input 
+                type="text" 
+                id="videoUrl" 
+                placeholder="Ex: https://www.youtube.com/watch?v=..."
+                autocomplete="off"
+                autocorrect="off"
+                autocapitalize="off"
+                spellcheck="false"
+            >
+
+            <!-- ETAPA 1: Processar -->
+            <div id="step1">
+                <button id="processBtn" class="btn btn-process">
+                    🌸 Preparar o vídeo com carinho 🌸
+                </button>
             </div>
 
-            <div id="message" class="message"></div>
+            <!-- ETAPA 2: Baixar -->
+            <div id="step2" class="hidden">
+                <div class="success-banner">
+                    <span class="success-emoji">✨</span>
+                    <h2>Pronto, minha linda!</h2>
+                    <p>Agora é só clicar no botão<br>grandão aqui embaixo ♡</p>
+                </div>
 
-            <div id="infoBox" class="info-box hidden">
-                <p>✅ Opções de download disponíveis!</p>
-                <span id="platformBadge" class="platform-badge"></span>
+                <a id="downloadBtn" class="btn btn-download" download>
+                    📥 BAIXAR COM AMOR 📥
+                </a>
+
+                <div class="download-tip">
+                    ⏳ <strong>Aguarde um pouquinho:</strong> O vídeo pode demorar alguns segundos pra baixar dependendo do tamanho, tá bem mamãe? ♡
+                </div>
+
+                <button id="resetBtn" class="btn btn-reset">
+                    ♡ Baixar outro vídeo pra mamãe ♡
+                </button>
             </div>
-
-            <button id="processBtn" class="btn btn-process">
-                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <polygon points="5 3 19 12 5 21 5 3"></polygon>
-                </svg>
-                Processar Vídeo
-            </button>
-
-            <div id="downloadButtons" class="download-buttons hidden"></div>
-
-            <button id="resetBtn" class="btn btn-reset hidden">
-                Baixar outro vídeo
-            </button>
 
             <div class="instructions">
-                <h3>📱 Como usar:</h3>
+                <h3>📱 Como usar (bem facinho, juro!):</h3>
                 <ol>
-                    <li><strong>1.</strong> Copie o link do vídeo (YouTube, Instagram, Facebook, TikTok)</li>
-                    <li><strong>2.</strong> Cole o link no campo acima</li>
-                    <li><strong>3.</strong> Clique no botão verde "Processar Vídeo"</li>
-                    <li><strong>4.</strong> Clique em um dos botões <strong>"BAIXAR"</strong> que aparecerem</li>
-                    <li><strong>5.</strong> Se o primeiro não funcionar, tente o próximo!</li>
+                    <li>Abra o vídeo que você ama</li>
+                    <li>Clique em <strong>Compartilhar → Copiar link</strong></li>
+                    <li>Cole aqui em cima</li>
+                    <li>Clique no botão <strong>rosa</strong></li>
+                    <li>Quando aparecer o botão grande, clica nele e pronto!</li>
                 </ol>
-                <div class="tip-box">
-                    <p>💡 <strong>Dica:</strong> Oferecemos várias opções de download. Se uma não funcionar, tente outra! Algumas podem pedir para você colar o link novamente no site deles.</p>
-                </div>
             </div>
         </div>
 
         <footer>
-            Feito com ❤️ para facilitar sua vida
+            Feito com o coração inteiro pro maior amor da minha vida:<br>
+            Minha mãe Nete ♡
         </footer>
     </div>
 
     <script>
+        const API_URL = 'http://localhost:3000/api';
         const videoUrlInput = document.getElementById('videoUrl');
         const processBtn = document.getElementById('processBtn');
-        const downloadButtonsDiv = document.getElementById('downloadButtons');
+        const downloadBtn = document.getElementById('downloadBtn');
         const resetBtn = document.getElementById('resetBtn');
-        const message = document.getElementById('message');
-        const infoBox = document.getElementById('infoBox');
-        const platformBadge = document.getElementById('platformBadge');
-
-        function showMessage(text, type) {
-            message.innerHTML = text;
-            message.className = `message ${type} show`;
-        }
-
-        function hideMessage() {
-            message.className = 'message';
-        }
-
-        function identifyPlatform(url) {
-            if (/instagram\.com/.test(url)) return 'instagram';
-            if (/youtu\.be|youtube\.com/.test(url)) return 'youtube';
-            if (/facebook\.com|fb\.watch|fb\.com/.test(url)) return 'facebook';
-            if (/tiktok\.com/.test(url)) return 'tiktok';
-            if (/twitter\.com|x\.com/.test(url)) return 'twitter';
-            return null;
-        }
-
-        function getDownloadOptions(url, platform) {
-            const encodedUrl = encodeURIComponent(url);
-            
-            // APIs e sites que funcionam de verdade
-            const options = [];
-
-            if (platform === 'youtube') {
-                options.push(
-                    {
-                        name: 'BAIXAR (Y2Mate)',
-                        url: `https://www.y2mate.com/youtube/${encodedUrl}`,
-                        primary: true
-                    },
-                    {
-                        name: 'Baixar (Alternativa 1)',
-                        url: `https://yt5s.io/en/${encodedUrl}`,
-                        primary: false
-                    },
-                    {
-                        name: 'Baixar (Alternativa 2)',
-                        url: `https://ytmp3.nu/youtube-to-mp4/`,
-                        needsCopy: true,
-                        primary: false
-                    }
-                );
-            } else if (platform === 'instagram') {
-                options.push(
-                    {
-                        name: 'BAIXAR (InstaDownloader)',
-                        url: `https://instadownloader.io/?url=${encodedUrl}`,
-                        primary: true
-                    },
-                    {
-                        name: 'Baixar (Alternativa 1)',
-                        url: `https://igram.world/pt`,
-                        needsCopy: true,
-                        primary: false
-                    },
-                    {
-                        name: 'Baixar (Alternativa 2)',
-                        url: `https://downloadgram.org/`,
-                        needsCopy: true,
-                        primary: false
-                    }
-                );
-            } else if (platform === 'facebook') {
-                options.push(
-                    {
-                        name: 'BAIXAR (FBDownloader)',
-                        url: `https://fbdownloader.app/pt`,
-                        needsCopy: true,
-                        primary: true
-                    },
-                    {
-                        name: 'Baixar (Alternativa 1)',
-                        url: `https://getmyfb.com/`,
-                        needsCopy: true,
-                        primary: false
-                    },
-                    {
-                        name: 'Baixar (Alternativa 2)',
-                        url: `https://fdown.net/`,
-                        needsCopy: true,
-                        primary: false
-                    }
-                );
-            } else if (platform === 'tiktok') {
-                options.push(
-                    {
-                        name: 'BAIXAR (SnapTik)',
-                        url: `https://snaptik.app/pt`,
-                        needsCopy: true,
-                        primary: true
-                    },
-                    {
-                        name: 'Baixar (Alternativa 1)',
-                        url: `https://tikdownloader.io/pt`,
-                        needsCopy: true,
-                        primary: false
-                    },
-                    {
-                        name: 'Baixar (Alternativa 2)',
-                        url: `https://musicaldown.com/pt`,
-                        needsCopy: true,
-                        primary: false
-                    }
-                );
-            } else if (platform === 'twitter') {
-                options.push(
-                    {
-                        name: 'BAIXAR (TWDown)',
-                        url: `https://twdown.net/`,
-                        needsCopy: true,
-                        primary: true
-                    },
-                    {
-                        name: 'Baixar (Alternativa)',
-                        url: `https://twittervideodownloader.com/`,
-                        needsCopy: true,
-                        primary: false
-                    }
-                );
-            }
-
-            return options;
-        }
+        const step1 = document.getElementById('step1');
+        const step2 = document.getElementById('step2');
 
         async function handleProcess() {
             const url = videoUrlInput.value.trim();
             
-            hideMessage();
-            infoBox.classList.add('hidden');
-            downloadButtonsDiv.innerHTML = '';
-            downloadButtonsDiv.classList.add('hidden');
-            resetBtn.classList.add('hidden');
-
             if (!url) {
-                showMessage('Por favor, cole o link do vídeo', 'error');
-                return;
-            }
-
-            const platform = identifyPlatform(url);
-
-            if (!platform) {
-                showMessage('Link não reconhecido. Use links do YouTube, Instagram, Facebook, TikTok ou Twitter/X', 'error');
+                alert("Cola o link do vídeo aqui, mamãe ♡");
                 return;
             }
 
             processBtn.disabled = true;
-            processBtn.innerHTML = '<div class="spinner"></div> Processando...';
+            processBtn.innerHTML = '<div class="spinner"></div> Preparando com muito amor...';
 
-            await new Promise(resolve => setTimeout(resolve, 800));
-
-            const options = getDownloadOptions(url, platform);
-
-            platformBadge.textContent = platform;
-            infoBox.classList.remove('hidden');
-
-            options.forEach((option, index) => {
-                const btn = document.createElement('a');
-                btn.href = option.url;
-                btn.target = '_blank';
-                btn.className = `btn ${option.primary ? 'btn-download primary' : 'btn-alternative'}`;
+            try {
+                const response = await fetch(`${API_URL}/video-info`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ url })
+                });
                 
-                const svg = `
-                    <svg width="${option.primary ? 35 : 28}" height="${option.primary ? 35 : 28}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-                        <polyline points="7 10 12 15 17 10"></polyline>
-                        <line x1="12" y1="15" x2="12" y2="3"></line>
-                    </svg>
-                `;
+                const data = await response.json();
 
-                btn.innerHTML = `${svg} ${option.name}`;
-
-                if (option.needsCopy) {
-                    btn.addEventListener('click', (e) => {
-                        navigator.clipboard.writeText(url);
-                        showMessage('✅ Link copiado! Cole no site que vai abrir.', 'info');
-                    });
-                }
-
-                downloadButtonsDiv.appendChild(btn);
-            });
-
-            downloadButtonsDiv.classList.remove('hidden');
-            resetBtn.classList.remove('hidden');
-
-            processBtn.disabled = false;
-            processBtn.innerHTML = `
-                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <polygon points="5 3 19 12 5 21 5 3"></polygon>
-                </svg>
-                Processar Vídeo
-            `;
-
-            showMessage('🎉 Múltiplas opções disponíveis! Se uma não funcionar, tente outra.', 'success');
+                if (data.success) {
+                    // Mudar para etapa 2
+                    step1.classList.add('hidden');
+                    step2.classList.remove('hidden');
+                    
+                    // Configurar link de download
+                    downloadBtn.href = `${API_URL}/download?url=${encodeURIComponent(url)}`;
+                    
+                    // Scroll suave para o botão de download
+                    setTimeout(() => {
+                        downloadBtn.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    }, 300);
+                } else {
+                    throw new Error(data.error || 'Ops, algo deu errado...');
+                }   
+            } finally {
+                processBtn.disabled = false;
+                processBtn.innerHTML = '🌸 Preparar o vídeo com carinho 🌸';
+            }
         }
 
         processBtn.addEventListener('click', handleProcess);
-
+        
         resetBtn.addEventListener('click', () => {
             videoUrlInput.value = '';
-            hideMessage();
-            infoBox.classList.add('hidden');
-            downloadButtonsDiv.innerHTML = '';
-            downloadButtonsDiv.classList.add('hidden');
-            resetBtn.classList.add('hidden');
+            step1.classList.remove('hidden');
+            step2.classList.add('hidden');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         });
-
+        
         videoUrlInput.addEventListener('keypress', (e) => {
             if (e.key === 'Enter') {
                 handleProcess();
             }
         });
+
+        // Prevenir zoom em dispositivos iOS ao focar no input
+        if (/iPhone|iPad|iPod/.test(navigator.userAgent)) {
+            document.querySelector('meta[name=viewport]').setAttribute(
+                'content', 
+                'width=device-width, initial-scale=1, maximum-scale=1'
+            );
+        }
     </script>
 </body>
 </html>
