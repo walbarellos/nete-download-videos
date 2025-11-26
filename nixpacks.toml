@@ -1,5 +1,8 @@
 [phases.setup]
 nixPkgs = ["nodejs", "python312", "python312Packages.pip", "ffmpeg", "yt-dlp"]
 
+[phases.install]
+cmds = ["npm install"]
+
 [start]
 cmd = "node server.js"
