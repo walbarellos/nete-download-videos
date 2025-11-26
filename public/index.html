@@ -244,89 +244,31 @@
             to { transform: rotate(360deg); } 
         }
 
-        /* Responsividade aprimorada */
         @media (max-width: 640px) {
-            body {
-                padding: 8px;
-            }
-            
-            .big-heart {
-                font-size: 60px;
-            }
-            
-            h1 {
-                font-size: 1.8em;
-            }
-            
-            .subtitle {
-                font-size: 1em;
-            }
-            
-            .love-message {
-                font-size: 1.05em;
-                padding: 18px;
-                line-height: 1.7;
-            }
-            
-            .card {
-                padding: 20px 15px;
-            }
-            
-            label {
-                font-size: 1.2em;
-            }
-            
-            input {
-                font-size: 1em;
-                padding: 16px;
-            }
-            
-            .btn {
-                font-size: 1.3em;
-                padding: 18px;
-            }
-            
-            .btn-download {
-                font-size: 1.6em !important;
-                padding: 25px 15px !important;
-            }
-            
-            .success-banner h2 {
-                font-size: 1.6em;
-            }
-            
-            .success-banner p {
-                font-size: 1.05em;
-            }
-            
-            footer {
-                font-size: 1em;
-            }
+            body { padding: 8px; }
+            .big-heart { font-size: 60px; }
+            h1 { font-size: 1.8em; }
+            .subtitle { font-size: 1em; }
+            .love-message { font-size: 1.05em; padding: 18px; line-height: 1.7; }
+            .card { padding: 20px 15px; }
+            label { font-size: 1.2em; }
+            input { font-size: 1em; padding: 16px; }
+            .btn { font-size: 1.3em; padding: 18px; }
+            .btn-download { font-size: 1.6em !important; padding: 25px 15px !important; }
+            .success-banner h2 { font-size: 1.6em; }
+            .success-banner p { font-size: 1.05em; }
+            footer { font-size: 1em; }
         }
         
         @media (max-width: 400px) {
-            h1 {
-                font-size: 1.5em;
-            }
-            
-            .love-message {
-                font-size: 0.95em;
-            }
-            
-            .btn-download {
-                font-size: 1.4em !important;
-            }
+            h1 { font-size: 1.5em; }
+            .love-message { font-size: 0.95em; }
+            .btn-download { font-size: 1.4em !important; }
         }
 
-        /* Melhorias de toque para mobile */
         @media (hover: none) and (pointer: coarse) {
-            .btn {
-                padding: 22px;
-            }
-            
-            input {
-                font-size: 16px; /* Evita zoom automático no iOS */
-            }
+            .btn { padding: 22px; }
+            input { font-size: 16px; }
         }
     </style>
 </head>
@@ -358,14 +300,12 @@
                 spellcheck="false"
             >
 
-            <!-- ETAPA 1: Processar -->
             <div id="step1">
                 <button id="processBtn" class="btn btn-process">
                     🌸 Preparar o vídeo com carinho 🌸
                 </button>
             </div>
 
-            <!-- ETAPA 2: Baixar -->
             <div id="step2" class="hidden">
                 <div class="success-banner">
                     <span class="success-emoji">✨</span>
@@ -390,7 +330,6 @@
     </div>
 
     <script>
-        const API_URL = 'http://localhost:3000/api';
         const videoUrlInput = document.getElementById('videoUrl');
         const processBtn = document.getElementById('processBtn');
         const downloadBtn = document.getElementById('downloadBtn');
@@ -401,15 +340,13 @@
         async function handleProcess() {
             const url = videoUrlInput.value.trim();
             
-            if (!url) {
-                return;
-            }
+            if (!url) return;
 
             processBtn.disabled = true;
             processBtn.innerHTML = '<div class="spinner"></div> Preparando com muito amor...';
 
             try {
-                const response = await fetch(`${API_URL}/video-info`, {
+                const response = await fetch('/api/video-info', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ url })
@@ -420,7 +357,7 @@
                 if (data.success) {
                     step1.classList.add('hidden');
                     step2.classList.remove('hidden');
-                    downloadBtn.href = `${API_URL}/download?url=${encodeURIComponent(url)}`;
+                    downloadBtn.href = `/api/download?url=${encodeURIComponent(url)}`;
                     
                     setTimeout(() => {
                         downloadBtn.scrollIntoView({ behavior: 'smooth', block: 'center' });
@@ -442,9 +379,7 @@
         });
         
         videoUrlInput.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') {
-                handleProcess();
-            }
+            if (e.key === 'Enter') handleProcess();
         });
 
         if (/iPhone|iPad|iPod/.test(navigator.userAgent)) {
