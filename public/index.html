@@ -210,47 +210,10 @@
             animation: none;
         }
 
-        .download-tip {
-            background: #fef3c7;
-            border: 3px solid #fcd34d;
-            border-radius: 15px;
-            padding: 15px;
-            margin: 15px 0;
-            font-size: 0.95em;
-            color: #92400e;
-            line-height: 1.6;
-        }
-
         .btn-reset {
             background: linear-gradient(135deg, #c084fc, #a855f7);
             font-size: 1.2em !important;
             padding: 18px !important;
-        }
-
-        .instructions {
-            margin-top: 30px;
-            background: #fefce8;
-            padding: 20px;
-            border-radius: 20px;
-            border: 3px dashed #fbbf24;
-            font-size: 1.05em;
-            color: #92400e;
-        }
-        
-        .instructions h3 {
-            margin-bottom: 15px;
-            font-size: 1.3em;
-            color: #92400e;
-        }
-        
-        .instructions ol { 
-            text-align: left; 
-            margin-left: 20px;
-            line-height: 2;
-        }
-        
-        .instructions strong { 
-            color: #dc2626; 
         }
 
         footer {
@@ -336,15 +299,6 @@
                 font-size: 1.05em;
             }
             
-            .instructions {
-                font-size: 1em;
-                padding: 18px;
-            }
-            
-            .instructions h3 {
-                font-size: 1.2em;
-            }
-            
             footer {
                 font-size: 1em;
             }
@@ -423,24 +377,9 @@
                     📥 BAIXAR COM AMOR 📥
                 </a>
 
-                <div class="download-tip">
-                    ⏳ <strong>Aguarde um pouquinho:</strong> O vídeo pode demorar alguns segundos pra baixar dependendo do tamanho, tá bem mamãe? ♡
-                </div>
-
                 <button id="resetBtn" class="btn btn-reset">
                     ♡ Baixar outro vídeo pra mamãe ♡
                 </button>
-            </div>
-
-            <div class="instructions">
-                <h3>📱 Como usar (bem facinho, juro!):</h3>
-                <ol>
-                    <li>Abra o vídeo que você ama</li>
-                    <li>Clique em <strong>Compartilhar → Copiar link</strong></li>
-                    <li>Cole aqui em cima</li>
-                    <li>Clique no botão <strong>rosa</strong></li>
-                    <li>Quando aparecer o botão grande, clica nele e pronto!</li>
-                </ol>
             </div>
         </div>
 
@@ -463,7 +402,6 @@
             const url = videoUrlInput.value.trim();
             
             if (!url) {
-                alert("Cola o link do vídeo aqui, mamãe ♡");
                 return;
             }
 
@@ -480,21 +418,15 @@
                 const data = await response.json();
 
                 if (data.success) {
-                    // Mudar para etapa 2
                     step1.classList.add('hidden');
                     step2.classList.remove('hidden');
-                    
-                    // Configurar link de download
                     downloadBtn.href = `${API_URL}/download?url=${encodeURIComponent(url)}`;
                     
-                    // Scroll suave para o botão de download
                     setTimeout(() => {
                         downloadBtn.scrollIntoView({ behavior: 'smooth', block: 'center' });
                     }, 300);
-                } else {
-                    throw new Error(data.error || 'Ops, algo deu errado...');
-                }   
-            } finally {
+                }
+            } catch (error) {
                 processBtn.disabled = false;
                 processBtn.innerHTML = '🌸 Preparar o vídeo com carinho 🌸';
             }
@@ -515,7 +447,6 @@
             }
         });
 
-        // Prevenir zoom em dispositivos iOS ao focar no input
         if (/iPhone|iPad|iPod/.test(navigator.userAgent)) {
             document.querySelector('meta[name=viewport]').setAttribute(
                 'content', 
