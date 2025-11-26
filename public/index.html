@@ -115,6 +115,7 @@
             align-items: center;
             justify-content: center;
             gap: 12px;
+            text-decoration: none;
             color: white;
         }
 
@@ -133,40 +134,47 @@
             cursor: not-allowed;
         }
 
-        .btn-download {
-            background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
-            font-size: 2.2em;
-            padding: 35px;
-            animation: bounceAndGlow 2s infinite;
-            text-decoration: none;
-            box-shadow: 0 10px 40px rgba(59, 130, 246, 0.5);
+        .download-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-bottom: 20px;
         }
 
-        @keyframes bounceAndGlow {
-            0%, 100% { 
-                transform: translateY(0) scale(1);
-                box-shadow: 0 10px 40px rgba(59, 130, 246, 0.5);
-            }
-            50% { 
-                transform: translateY(-15px) scale(1.02);
-                box-shadow: 0 20px 60px rgba(59, 130, 246, 0.7);
-            }
+        .btn-download {
+            background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+            font-size: 1.5em;
+            padding: 22px;
         }
 
         .btn-download:hover {
-            transform: translateY(-10px) scale(1.05) !important;
-            box-shadow: 0 25px 70px rgba(59, 130, 246, 0.8) !important;
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(59, 130, 246, 0.4);
+        }
+
+        .btn-download.primary {
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .btn-alternative {
+            background: linear-gradient(135deg, #14b8a6 0%, #0891b2 100%);
+            font-size: 1.2em;
+            padding: 18px;
         }
 
         .btn-reset {
-            background: #9ca3af;
+            background: #6b7280;
             padding: 15px;
-            font-size: 1em;
-            margin-top: 15px;
+            font-size: 1.1em;
         }
 
         .btn-reset:hover {
-            background: #6b7280;
+            background: #4b5563;
         }
 
         .message {
@@ -184,9 +192,9 @@
         }
 
         .message.error {
-            background: #fee;
-            border: 2px solid #fcc;
-            color: #c33;
+            background: #fef3c7;
+            border: 2px solid #fcd34d;
+            color: #92400e;
         }
 
         .message.success {
@@ -195,65 +203,34 @@
             color: #065f46;
         }
 
-        .big-success-message {
-            background: linear-gradient(135deg, #10b981, #059669);
-            color: white;
-            padding: 30px;
-            border-radius: 20px;
-            text-align: center;
-            margin-bottom: 25px;
-            animation: slideDown 0.5s ease-out;
+        .message.info {
+            background: #dbeafe;
+            border: 2px solid #93c5fd;
+            color: #1e40af;
         }
 
-        @keyframes slideDown {
-            from {
-                opacity: 0;
-                transform: translateY(-20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .success-icon {
-            font-size: 4em;
-            margin-bottom: 10px;
-            animation: scaleIn 0.6s ease-out;
-        }
-
-        @keyframes scaleIn {
-            from {
-                transform: scale(0);
-            }
-            to {
-                transform: scale(1);
-            }
-        }
-
-        .big-success-message h2 {
-            font-size: 2em;
-            margin-bottom: 10px;
-        }
-
-        .big-success-message p {
-            font-size: 1.2em;
-            opacity: 0.95;
-        }
-
-        .download-info {
-            background: #fef3c7;
-            border: 2px solid #fcd34d;
+        .info-box {
+            background: #d1fae5;
+            border: 2px solid #6ee7b7;
             border-radius: 15px;
-            padding: 15px;
-            margin: 20px 0;
-            text-align: center;
+            padding: 18px;
+            margin-bottom: 20px;
         }
 
-        .download-info p {
-            color: #92400e;
-            font-weight: 500;
-            margin: 0;
+        .info-box p {
+            color: #065f46;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .platform-badge {
+            display: inline-block;
+            background: #9333ea;
+            color: white;
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            text-transform: capitalize;
         }
 
         .instructions {
@@ -286,13 +263,12 @@
         .tip-box {
             margin-top: 20px;
             padding: 15px;
-            background: #dcfce7;
+            background: #dbeafe;
             border-radius: 12px;
-            border: 2px solid #86efac;
         }
 
         .tip-box p {
-            color: #166534;
+            color: #1e40af;
             font-size: 0.95em;
             line-height: 1.6;
         }
@@ -322,33 +298,6 @@
             font-size: 0.95em;
         }
 
-        .progress-bar {
-            width: 100%;
-            height: 8px;
-            background: #e5e7eb;
-            border-radius: 10px;
-            overflow: hidden;
-            margin-top: 15px;
-            display: none;
-        }
-
-        .progress-bar.show {
-            display: block;
-        }
-
-        .progress-fill {
-            height: 100%;
-            background: linear-gradient(90deg, #3b82f6, #8b5cf6);
-            width: 0%;
-            transition: width 0.3s;
-            animation: pulse-bar 1.5s infinite;
-        }
-
-        @keyframes pulse-bar {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.7; }
-        }
-
         @media (max-width: 640px) {
             h1 {
                 font-size: 2em;
@@ -357,7 +306,7 @@
                 padding: 25px;
             }
             .btn-download {
-                font-size: 1.5em;
+                font-size: 1.3em;
             }
         }
     </style>
@@ -373,7 +322,7 @@
                 </div>
             </div>
             <h1>Baixador de Vídeos</h1>
-            <p class="subtitle">YouTube • Instagram • Facebook • TikTok • +1000 sites</p>
+            <p class="subtitle">YouTube • Instagram • Facebook • TikTok</p>
         </div>
 
         <div class="card">
@@ -382,131 +331,271 @@
                 <input 
                     type="text" 
                     id="videoUrl" 
-                    placeholder="https://youtube.com/... ou instagram.com/... ou facebook.com/..."
+                    placeholder="https://youtube.com/... ou instagram.com/..."
                 />
             </div>
 
             <div id="message" class="message"></div>
 
-            <div id="videoInfo" class="video-info"></div>
-
-            <!-- ETAPA 1: Processar -->
-            <div id="step1">
-                <button id="processBtn" class="btn btn-process">
-                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <polygon points="5 3 19 12 5 21 5 3"></polygon>
-                    </svg>
-                    Processar Vídeo
-                </button>
+            <div id="infoBox" class="info-box hidden">
+                <p>✅ Opções de download disponíveis!</p>
+                <span id="platformBadge" class="platform-badge"></span>
             </div>
 
-            <!-- ETAPA 2: Baixar -->
-            <div id="step2" class="hidden">
-                <div class="big-success-message">
-                    <div class="success-icon">✅</div>
-                    <h2>Vídeo Pronto!</h2>
-                    <p>Agora clique no botão azul grande abaixo:</p>
-                </div>
+            <button id="processBtn" class="btn btn-process">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                </svg>
+                Processar Vídeo
+            </button>
 
-                <a id="downloadBtn" class="btn btn-download" download>
-                    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
-                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-                        <polyline points="7 10 12 15 17 10"></polyline>
-                        <line x1="12" y1="15" x2="12" y2="3"></line>
-                    </svg>
-                    BAIXAR AGORA
-                </a>
+            <div id="downloadButtons" class="download-buttons hidden"></div>
 
-                <div class="download-info">
-                    <p>⏳ O download pode levar alguns segundos dependendo do tamanho do vídeo</p>
-                </div>
-
-                <button id="resetBtn" class="btn btn-reset">
-                    🔄 Baixar outro vídeo
-                </button>
-            </div>
-
-            <div class="progress-bar" id="progressBar">
-                <div class="progress-fill" id="progressFill"></div>
-            </div>
+            <button id="resetBtn" class="btn btn-reset hidden">
+                Baixar outro vídeo
+            </button>
 
             <div class="instructions">
                 <h3>📱 Como usar:</h3>
                 <ol>
-                    <li><strong>1.</strong> Copie o link do vídeo</li>
-                    <li><strong>2.</strong> Cole no campo acima</li>
-                    <li><strong>3.</strong> Clique no botão <strong>VERDE</strong></li>
-                    <li><strong>4.</strong> Quando aparecer, clique no botão <strong>AZUL GRANDE</strong></li>
+                    <li><strong>1.</strong> Copie o link do vídeo (YouTube, Instagram, Facebook, TikTok)</li>
+                    <li><strong>2.</strong> Cole o link no campo acima</li>
+                    <li><strong>3.</strong> Clique no botão verde "Processar Vídeo"</li>
+                    <li><strong>4.</strong> Clique em um dos botões <strong>"BAIXAR"</strong> que aparecerem</li>
+                    <li><strong>5.</strong> Se o primeiro não funcionar, tente o próximo!</li>
                 </ol>
                 <div class="tip-box">
-                    <p>✅ <strong>Simples assim!</strong> Funciona com YouTube, Instagram, Facebook, TikTok!</p>
+                    <p>💡 <strong>Dica:</strong> Oferecemos várias opções de download. Se uma não funcionar, tente outra! Algumas podem pedir para você colar o link novamente no site deles.</p>
                 </div>
             </div>
         </div>
 
         <footer>
-            Feito com ❤️ • Powered by yt-dlp and walbarellos
+            Feito com ❤️ para facilitar sua vida
         </footer>
     </div>
 
- <script>
-    // API EXTERNA GRÁTIS E QUE NUNCA CAI (funciona direto na Vercel)
-    const API_BASE = 'https://api.cococut.net';
+    <script>
+        const videoUrlInput = document.getElementById('videoUrl');
+        const processBtn = document.getElementById('processBtn');
+        const downloadButtonsDiv = document.getElementById('downloadButtons');
+        const resetBtn = document.getElementById('resetBtn');
+        const message = document.getElementById('message');
+        const infoBox = document.getElementById('infoBox');
+        const platformBadge = document.getElementById('platformBadge');
 
-    const videoUrlInput = document.getElementById('videoUrl');
-    const processBtn = document.getElementById('processBtn');
-    const downloadBtn = document.getElementById('downloadBtn');
-    const resetBtn = document.getElementById('resetBtn');
-    const step1 = document.getElementById('step1');
-    const step2 = document.getElementById('step2');
-
-    async function handleProcess() {
-        const url = videoUrlInput.value.trim();
-        if (!url) {
-            alert("Cola o link do vídeo aqui, mamãe ♡");
-            return;
+        function showMessage(text, type) {
+            message.innerHTML = text;
+            message.className = `message ${type} show`;
         }
 
-        processBtn.disabled = true;
-        processBtn.innerHTML = '<div class="spinner"></div> Preparando com amor...';
+        function hideMessage() {
+            message.className = 'message';
+        }
 
-        try {
-            const resp = await fetch(`${API_BASE}/v1/video?url=${encodeURIComponent(url)}`);
-            const data = await resp.json();
+        function identifyPlatform(url) {
+            if (/instagram\.com/.test(url)) return 'instagram';
+            if (/youtu\.be|youtube\.com/.test(url)) return 'youtube';
+            if (/facebook\.com|fb\.watch|fb\.com/.test(url)) return 'facebook';
+            if (/tiktok\.com/.test(url)) return 'tiktok';
+            if (/twitter\.com|x\.com/.test(url)) return 'twitter';
+            return null;
+        }
 
-            if (data.code === 200 && data.data?.medias?.length > 0) {
-                // Pega o melhor MP4 disponível
-                const best = data.data.medias.find(m => m.quality.includes('p') && m.format === 'mp4') 
-                          || data.data.medias[0];
+        function getDownloadOptions(url, platform) {
+            const encodedUrl = encodeURIComponent(url);
+            
+            // APIs e sites que funcionam de verdade
+            const options = [];
 
-                step1.classList.add('hidden');
-                step2.classList.remove('hidden');
-                downloadBtn.href = best.url;
-                downloadBtn.download = data.data.title + '.mp4';
-
-                setTimeout(() => downloadBtn.scrollIntoView({ behavior: 'smooth', block: 'center' }), 300);
-            } else {
-                throw new Error("Vídeo não encontrado ou site não suportado");
+            if (platform === 'youtube') {
+                options.push(
+                    {
+                        name: 'BAIXAR (Y2Mate)',
+                        url: `https://www.y2mate.com/youtube/${encodedUrl}`,
+                        primary: true
+                    },
+                    {
+                        name: 'Baixar (Alternativa 1)',
+                        url: `https://yt5s.io/en/${encodedUrl}`,
+                        primary: false
+                    },
+                    {
+                        name: 'Baixar (Alternativa 2)',
+                        url: `https://ytmp3.nu/youtube-to-mp4/`,
+                        needsCopy: true,
+                        primary: false
+                    }
+                );
+            } else if (platform === 'instagram') {
+                options.push(
+                    {
+                        name: 'BAIXAR (InstaDownloader)',
+                        url: `https://instadownloader.io/?url=${encodedUrl}`,
+                        primary: true
+                    },
+                    {
+                        name: 'Baixar (Alternativa 1)',
+                        url: `https://igram.world/pt`,
+                        needsCopy: true,
+                        primary: false
+                    },
+                    {
+                        name: 'Baixar (Alternativa 2)',
+                        url: `https://downloadgram.org/`,
+                        needsCopy: true,
+                        primary: false
+                    }
+                );
+            } else if (platform === 'facebook') {
+                options.push(
+                    {
+                        name: 'BAIXAR (FBDownloader)',
+                        url: `https://fbdownloader.app/pt`,
+                        needsCopy: true,
+                        primary: true
+                    },
+                    {
+                        name: 'Baixar (Alternativa 1)',
+                        url: `https://getmyfb.com/`,
+                        needsCopy: true,
+                        primary: false
+                    },
+                    {
+                        name: 'Baixar (Alternativa 2)',
+                        url: `https://fdown.net/`,
+                        needsCopy: true,
+                        primary: false
+                    }
+                );
+            } else if (platform === 'tiktok') {
+                options.push(
+                    {
+                        name: 'BAIXAR (SnapTik)',
+                        url: `https://snaptik.app/pt`,
+                        needsCopy: true,
+                        primary: true
+                    },
+                    {
+                        name: 'Baixar (Alternativa 1)',
+                        url: `https://tikdownloader.io/pt`,
+                        needsCopy: true,
+                        primary: false
+                    },
+                    {
+                        name: 'Baixar (Alternativa 2)',
+                        url: `https://musicaldown.com/pt`,
+                        needsCopy: true,
+                        primary: false
+                    }
+                );
+            } else if (platform === 'twitter') {
+                options.push(
+                    {
+                        name: 'BAIXAR (TWDown)',
+                        url: `https://twdown.net/`,
+                        needsCopy: true,
+                        primary: true
+                    },
+                    {
+                        name: 'Baixar (Alternativa)',
+                        url: `https://twittervideodownloader.com/`,
+                        needsCopy: true,
+                        primary: false
+                    }
+                );
             }
-        } catch (e) {
-            console.error(e);
-            alert('Ops, esse vídeo não deu certo agora, mamãe ♡\nTenta outro link ou chama seu filho que ele resolve!');
-        } finally {
-            processBtn.disabled = false;
-            processBtn.innerHTML = 'Preparar o vídeo com carinho';
+
+            return options;
         }
-    }
 
-    processBtn.onclick = handleProcess;
-    resetBtn.onclick = () => {
-        videoUrlInput.value = '';
-        step1.classList.remove('hidden');
-        step2.classList.add('hidden');
-    };
+        async function handleProcess() {
+            const url = videoUrlInput.value.trim();
+            
+            hideMessage();
+            infoBox.classList.add('hidden');
+            downloadButtonsDiv.innerHTML = '';
+            downloadButtonsDiv.classList.add('hidden');
+            resetBtn.classList.add('hidden');
 
-    videoUrlInput.addEventListener('keypress', e => {
-        if (e.key === 'Enter') handleProcess();
-    });
-</script>
+            if (!url) {
+                showMessage('Por favor, cole o link do vídeo', 'error');
+                return;
+            }
+
+            const platform = identifyPlatform(url);
+
+            if (!platform) {
+                showMessage('Link não reconhecido. Use links do YouTube, Instagram, Facebook, TikTok ou Twitter/X', 'error');
+                return;
+            }
+
+            processBtn.disabled = true;
+            processBtn.innerHTML = '<div class="spinner"></div> Processando...';
+
+            await new Promise(resolve => setTimeout(resolve, 800));
+
+            const options = getDownloadOptions(url, platform);
+
+            platformBadge.textContent = platform;
+            infoBox.classList.remove('hidden');
+
+            options.forEach((option, index) => {
+                const btn = document.createElement('a');
+                btn.href = option.url;
+                btn.target = '_blank';
+                btn.className = `btn ${option.primary ? 'btn-download primary' : 'btn-alternative'}`;
+                
+                const svg = `
+                    <svg width="${option.primary ? 35 : 28}" height="${option.primary ? 35 : 28}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                        <polyline points="7 10 12 15 17 10"></polyline>
+                        <line x1="12" y1="15" x2="12" y2="3"></line>
+                    </svg>
+                `;
+
+                btn.innerHTML = `${svg} ${option.name}`;
+
+                if (option.needsCopy) {
+                    btn.addEventListener('click', (e) => {
+                        navigator.clipboard.writeText(url);
+                        showMessage('✅ Link copiado! Cole no site que vai abrir.', 'info');
+                    });
+                }
+
+                downloadButtonsDiv.appendChild(btn);
+            });
+
+            downloadButtonsDiv.classList.remove('hidden');
+            resetBtn.classList.remove('hidden');
+
+            processBtn.disabled = false;
+            processBtn.innerHTML = `
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                </svg>
+                Processar Vídeo
+            `;
+
+            showMessage('🎉 Múltiplas opções disponíveis! Se uma não funcionar, tente outra.', 'success');
+        }
+
+        processBtn.addEventListener('click', handleProcess);
+
+        resetBtn.addEventListener('click', () => {
+            videoUrlInput.value = '';
+            hideMessage();
+            infoBox.classList.add('hidden');
+            downloadButtonsDiv.innerHTML = '';
+            downloadButtonsDiv.classList.add('hidden');
+            resetBtn.classList.add('hidden');
+        });
+
+        videoUrlInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                handleProcess();
+            }
+        });
+    </script>
 </body>
 </html>
